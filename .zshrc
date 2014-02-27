@@ -46,7 +46,7 @@ alias tmux="TERM=screen-256color-bce tmux"
 plugins=(git virtualenv)
 
 source $ZSH/oh-my-zsh.sh
-source .zshrc-os
+source ~/.zshrc-os
 
 # Customize to your needs...
 export PATH=$PATH:/usr/local/sbin
@@ -69,3 +69,5 @@ export PHANTOMJS_BIN=/usr/bin/phantomjs
 # Allow ctrl-s to be passed in
 stty -ixon
 
+# Setting vi editing mode
+bindkey -v
