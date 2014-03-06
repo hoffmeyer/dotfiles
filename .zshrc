@@ -2,17 +2,14 @@
 ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
+
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="af-magic"
+ZSH_THEME="robbyrussell"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# color sceme fix for tmux
-alias tmux="TERM=screen-256color-bce tmux"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -40,24 +37,24 @@ alias tmux="TERM=screen-256color-bce tmux"
 # much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git virtualenv)
-
-source $ZSH/oh-my-zsh.sh
-source ~/.zshrc-os
-
 # Customize to your needs...
-export PATH=$PATH:/usr/local/sbin
+export PATH=/usr/local/sbin
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:/usr/sbin
 export PATH=$PATH:/usr/bin
 export PATH=$PATH:/sbin
 export PATH=$PATH:/bin
-# Android
+# Android dev
 export PATH=$PATH:~/Development/android/sdk/tools
 export PATH=$PATH:~/Development/android/sdk/platform-tools
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+plugins=(git virtualenv colorize brew bower history history-substring-search safe-paste)
+
+source $ZSH/oh-my-zsh.sh
+source ~/.zshrc-os
 
 # Set correct term for tmux so solarized theme works in vim
 alias tmux="TERM=screen-256color-bce tmux"
@@ -69,5 +66,3 @@ export PHANTOMJS_BIN=/usr/bin/phantomjs
 # Allow ctrl-s to be passed in
 stty -ixon
 
-# Setting vi editing mode
-bindkey -v
