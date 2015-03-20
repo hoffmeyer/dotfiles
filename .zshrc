@@ -37,8 +37,12 @@ ZSH_THEME="robbyrussell"
 # much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+# set the terminal to use 256 colors
+export TERM=xterm-256color
+
 # Customize to your needs...
 export PATH=/usr/local/sbin
+export PATH=/usr/local/share/npm/bin
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:/usr/sbin
 export PATH=$PATH:/usr/bin
@@ -55,6 +59,7 @@ plugins=(git virtualenv colorize brew bower history history-substring-search saf
 
 source $ZSH/oh-my-zsh.sh
 source ~/.zshrc-os
+source ~/.zshrc-local
 
 # Set correct term for tmux so solarized theme works in vim
 alias tmux="TERM=screen-256color-bce tmux"
@@ -62,7 +67,14 @@ alias tmux="TERM=screen-256color-bce tmux"
 # Path to phantomjs
 export PHANTOMJS_BIN=/usr/bin/phantomjs
 
-
 # Allow ctrl-s to be passed in
 stty -ixon
 
+# Set TERM for tmux to behave
+set TERM='rxvt'
+
+# Allow usage of ^ if eg git commands (HEAD^)
+setopt NO_NOMATCH
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

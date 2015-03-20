@@ -5,32 +5,30 @@ set guioptions-=m
 set guioptions-=r
 endif
 
-syntax enable
-
+syntax on
 set encoding=utf-8
-
-" solarized colortheme settings
 set background=dark
-colorscheme solarized
-filetype plugin indent on
+" ignores case in search start search with /C for case sensitivity
+set ignorecase
 
-" vim-airline settings
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
+" https://raw.githubusercontent.com/fatih/molokai/master/colors/molokai.vim
+colorscheme molokai
 
 " enable line numbers
-set nu
+" set relativenumber
+set number
 
 " allow buffer switch when current buffer is not saved
 :set hidden
 
 " set tabs to display as two spaces
-set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 
 " ctrl-p settings
 let g:ctrlp_custom_ignore = '\v[\/](dist|node_modules|bower_components)$'
 
 " syntastic settings
+let g:syntastic_check_on_open=1
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
 " nerdTree settings
@@ -48,6 +46,10 @@ map <leader>i :e app/main.html<enter>
 map <leader>o <C-p>
 inoremap (; ();<Esc>hi
 inoremap {<CR> {<CR>}<Esc><S-o>
+" jump to the end of the line in insert mode
+inoremap <C-e> <C-o>$
+" jump to the beginning of the line in insert mode
+inoremap <C-a> <C-o>0
 
 
 "map ctrl-s to save file
@@ -59,8 +61,8 @@ inoremap <silent> <C-S>         <C-O>:update<CR>
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required! 
@@ -69,20 +71,23 @@ Bundle 'gmarik/vundle'
 " My Bundles here:
 "
 " original repos on github
-Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-sensible'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'kien/ctrlp.vim'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'pangloss/vim-javascript'
-Bundle 'tpope/vim-sensible'
-Bundle 'mattn/emmet-vim'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'marijnh/tern_for_vim'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'bling/vim-airline'
+Bundle 'jelera/vim-javascript-syntax'
+Bundle 'pangloss/vim-javascript'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'Raimondi/delimitMate'
+Bundle 'digitaltoad/vim-jade'
+Bundle 'groenewege/vim-less'
+Bundle 'hail2u/vim-css3-syntax'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'fatih/vim-go'
 
 " vim-scripts repos
 "Bundle 'L9'
@@ -92,7 +97,9 @@ Bundle 'bling/vim-airline'
 "Bundle 'file:///Users/gmarik/path/to/plugin'
 " ...
 
-filetype plugin indent on     " required!
+"All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
 "
 " Brief help
 " :BundleList          - list configured bundles
