@@ -1,3 +1,7 @@
 
 # Setting java home
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_07.jdk/Contents/Home
+
+# User vim from macvim installed by brew for newer version
+alias vim='mvim -v'
+alias vi='mvim -v'
