@@ -38,7 +38,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # set the terminal to use 256 colors
-export TERM=xterm-256color
+export TERM=screen-256color
 
 # Customize to your needs...
 export PATH=/usr/local/sbin
