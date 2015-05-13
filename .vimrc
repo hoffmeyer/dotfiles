@@ -88,6 +88,7 @@ Bundle 'groenewege/vim-less'
 Bundle 'hail2u/vim-css3-syntax'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'fatih/vim-go'
+Plugin 'mxw/vim-jsx'
 
 " vim-scripts repos
 "Bundle 'L9'
