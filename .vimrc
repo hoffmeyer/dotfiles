@@ -1,112 +1,173 @@
-" Removes top bar in macvim and gvim
-if has("gui_running")
-set guioptions-=T
-set guioptions-=m
-set guioptions-=r
-endif
+" vim:fdm=marker
 
-syntax on
-set encoding=utf-8
-set background=dark
-" ignores case in search start search with /C for case sensitivity
+" General stuff {{{
+
+" dont try to be compatible with vi (required by vundle)
+set nocompatible
+
+" Blink instead of beeping
+set visualbell
+
+" Set the leader key
+let mapleader = ","
+
+" ignore case when searching
 set ignorecase
 
-" https://raw.githubusercontent.com/fatih/molokai/master/colors/molokai.vim
-colorscheme molokai
+" be smart about case while searching
+set smartcase
 
-" enable line numbers
-" set relativenumber
+"Highlight search results
+set hlsearch
+
+" Makes search work like in mordern browsers
+set incsearch
+
+" show matching brackets
+set showmatch
+
+" How many seconds should the cursor blink when matching brackets
+set mat=2
+
+" Set how many lines of history VIM has to remember
+set history=700
+
+" Automatically read a file when it has been changed from the outside
+set autoread
+
+" Always show the status line
+set laststatus=2
+
+" Turn backup off, since most stuff is in Git anyway...
+set nobackup
+set nowb
+set noswapfile
+
+" Source the vimrc file after saving it
+augroup sourcing
+  autocmd!
+  if has('nvim')
+    autocmd bufwritepost init.vim source $MYVIMRC
+  else
+    autocmd bufwritepost .vimrc source $MYVIMRC
+  endif
+augroup END
+
+" }}}
+" Key mappings {{{
+":imap ii <Esc>
+" }}}
+" Plugins {{{
+
+" Load vim-plug
+if empty(glob("~/.vim/autoload/plug.vim"))
+    execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+endif
+
+call plug#begin('~/.vim/plugged')
+
+" Theme
+Plug 'altercation/vim-colors-solarized'
+
+" Support bundles
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'vim-scripts/gitignore'
+
+" Bars panels and files
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'scrooloose/nerdtree'
+Plug 'ctrlpvim/ctrlp.vim'
+
+" Syntax highligting
+Plug 'w0rp/ale'
+
+" tab completion
+Plug 'Shougo/neocomplete'
+
+" Allow pane movement to jump out of vim into tmux
+Plug 'christoomey/vim-tmux-navigator'
+
+" Haskell
+Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+Plug 'enomsg/vim-haskellConcealPlus', { 'for': 'haskell' }
+Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
+Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
+Plug 'mpickering/hlint-refactor-vim', { 'for': 'haskell' }
+Plug 'alx741/vim-hindent', { 'for': 'haskell' }
+
+" Add plugins to &runtimepath
+call plug#end()
+
+" }}}
+" UI {{{
+
+" Turn on syntax hightlighting
+syntax enable
+
+" Enable line numbers
 set number
 
-" allow buffer switch when current buffer is not saved
-:set hidden
+" Make line numbers relative
+set relativenumber
 
-" set tabs to display as two spaces
-set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+" Show position in file
+set ruler
 
-" ctrl-p settings
-let g:ctrlp_custom_ignore = '\v[\/](dist|node_modules|bower_components)$'
+" Automatically populate powerline fonts for airline plugin
+let g:airline_powerline_fonts = 1
 
-" syntastic settings
-let g:syntastic_check_on_open=1
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+" }}}
+" Theme {{{
+set background=dark
+colorscheme solarized
+" }}}
+" Spaces and tabs {{{
 
-" nerdTree settings
-map <C-n> :NERDTreeToggle<CR>
+" The number of spaces a tab counts for. How it is visually shown on screen
+set tabstop=2
 
-" keyboard mappings
-let mapleader = " "
-nnoremap <leader>l :ls<cr>:b<space>
-map <leader>n :bn<cr>
-map <leader>p :bp<cr>
-map <leader>d :bd<cr>  
-map <leader>r :e<cr>
-map <leader>v :e ~/.vimrc<enter>
-map <leader>i :e app/main.html<enter>
-map <leader>o <C-p>
-inoremap (; ();<Esc>hi
-inoremap {<CR> {<CR>}<Esc><S-o>
-" jump to the end of the line in insert mode
-inoremap <C-e> <C-o>$
-" jump to the beginning of the line in insert mode
-inoremap <C-a> <C-o>0
+" The number of spaces a tab counts for while editing. How many spaces are inserted when pressing tab, and how many are removed when pressing backspace
+set softtabstop=2
 
+" Tabs ARE spaces. Always insert spaces instead of tabs
+set expandtab
 
-"map ctrl-s to save file
-noremap <silent> <C-S>          :update<CR>
-vnoremap <silent> <C-S>         <C-C>:update<CR>
-inoremap <silent> <C-S>         <C-O>:update<CR>
+" }}}
+" NERDTree {{{
 
-" vundle stuff
-set nocompatible               " be iMproved
-filetype off                   " required!
+" Close nerdtree after a file is selected
+let NERDTreeQuitOnOpen = 1
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+function! IsNERDTreeOpen()
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
 
-" let Vundle manage Vundle
-" required! 
-Bundle 'gmarik/vundle'
+function! ToggleFindNerd()
+  if IsNERDTreeOpen()
+    exec ':NERDTreeToggle'
+  else
+    exec ':NERDTreeFind'
+  endif
+endfunction
 
-" My Bundles here:
-"
-" original repos on github
-Bundle 'tpope/vim-sensible'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'kien/ctrlp.vim'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'marijnh/tern_for_vim'
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'pangloss/vim-javascript'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'Raimondi/delimitMate'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'groenewege/vim-less'
-Bundle 'hail2u/vim-css3-syntax'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'fatih/vim-go'
-Plugin 'mxw/vim-jsx'
+" If nerd tree is closed, find current file, if open, close it
+nmap <silent> <leader>f <ESC>:call ToggleFindNerd()<CR>
+nmap <silent> <leader>F <ESC>:NERDTreeToggle<CR>
 
-" vim-scripts repos
-"Bundle 'L9'
-" non github repos
-"Bundle 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (ie. when working on your own plugin)
-"Bundle 'file:///Users/gmarik/path/to/plugin'
-" ...
+" }}}
+" Ale {{{
+" }}}
+" Ghc {{{
 
-"All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-"
-" Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
+map <silent> tw :GhcModTypeInsert<CR>
+map <silent> ts :GhcModSplitFunCase<CR>
+map <silent> tq :GhcModType<CR>
+map <silent> te :GhcModTypeClear<CR>
+map <silent> th :Hoogle<CR>
+
+" }}}
+" Neocomplete {{{
+let g:neocomplete#enable_at_startup = 1
+" }}}

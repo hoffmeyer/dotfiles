@@ -1,0 +1,56 @@
+[alias]
+    st = status
+    co = checkout
+    pr = pull --rebase
+    ec = config --global -e
+    cob = checkout -b
+    cm = !git add -A && git commit -m
+    save = !git add -A && git commit -m 'SAVEPOINT'
+    wip = !git add -u && git commit -m "WIP" 
+    undo = reset HEAD~1 --mixed
+    amend = commit -a --amend
+    wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+    bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+    bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
+    changes = log HEAD.. origin --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+    lg = !"git lg1"
+    view-remote = for-each-ref --sort=committerdate refs/remotes/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(authorname)%(color:reset) -(%(color:green)%(committerdate:relative)%(color:reset))'
+	oldest-ancestor = !zsh -c 'diff --old-line-format= --new-line-format= <(git rev-list --first-parent \"${1:-master}\") <(git rev-list --first-parent \"${2:-HEAD}\") | head -1' -
+[core]
+	autocrlf = input
+	pager = diff-so-fancy | less --tabs=1,5 -R
+	excludesfile = /Users/hoffmeyer/.gitignore_global
+[difftool "sourcetree"]
+	cmd = /Applications/p4merge.app/Contents/MacOS/p4merge \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/p4merge.app/Contents/MacOS/p4merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+	trustExitCode = true
+	keepBackup = false
+	keepTemporaries = false
+[user]
+	name = Flemming Hoffmeyer
+	email = flemming@festina-lente.dk
+[push]
+	default = simple
+[merge]
+	keepBackup = false
+	tool = p4merge
+[diff]
+	tool = p4merge
+[difftool "p4merge"]
+	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE
+[mergetool "p4merge"]
+  cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge "\"$PWD/$BASE\"" "\"$PWD/$REMOTE\"" "\"$PWD/$LOCAL\"" "\"$PWD/$MERGED\""
+	trustExitCode = false
+[mergetool]
+	keepBackup = false
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
+	process = git-lfs filter-process
+[commit]
+	template = /Users/hoffmeyer/.stCommitMsg

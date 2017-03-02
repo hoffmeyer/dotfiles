@@ -1,0 +1,81 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "/private/var/folders/44/6r70_yqd7ngb6md0rp06tjw00000gn/T/d-11722-62944-1gbp7ki/package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/private/var/folders/44/6r70_yqd7ngb6md0rp06tjw00000gn/T/d-11722-62944-1gbp7ki/package.tgz",
+        "spec": "/private/var/folders/44/6r70_yqd7ngb6md0rp06tjw00000gn/T/d-11722-62944-1gbp7ki/package.tgz",
+        "type": "local"
+      },
+      "/private/var/folders/44/6r70_yqd7ngb6md0rp06tjw00000gn/T/apm-install-dir-11722-62944-22f1ub"
+    ]
+  ],
+  "_from": "../d-11722-62944-1gbp7ki/package.tgz",
+  "_id": "ide-haskell-hasktags@0.0.10",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ide-haskell-hasktags",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/private/var/folders/44/6r70_yqd7ngb6md0rp06tjw00000gn/T/d-11722-62944-1gbp7ki/package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/private/var/folders/44/6r70_yqd7ngb6md0rp06tjw00000gn/T/d-11722-62944-1gbp7ki/package.tgz",
+    "spec": "/private/var/folders/44/6r70_yqd7ngb6md0rp06tjw00000gn/T/d-11722-62944-1gbp7ki/package.tgz",
+    "type": "local"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../d-11722-62944-1gbp7ki/package.tgz",
+  "_shasum": "ad284e6aa9447adc8e57fd46d9faf98c936ccfc7",
+  "_shrinkwrap": null,
+  "_spec": "/private/var/folders/44/6r70_yqd7ngb6md0rp06tjw00000gn/T/d-11722-62944-1gbp7ki/package.tgz",
+  "_where": "/private/var/folders/44/6r70_yqd7ngb6md0rp06tjw00000gn/T/apm-install-dir-11722-62944-22f1ub",
+  "activationHooks": [
+    "language-haskell:grammar-used"
+  ],
+  "bugs": {
+    "url": "https://github.com/atom-haskell/ide-haskell-hasktags/issues"
+  },
+  "consumedServices": {
+    "ide-haskell-upi": {
+      "description": "Uses ide-haskell's unified pluggable interface",
+      "versions": {
+        "0.0.1": "consumeUPI"
+      }
+    }
+  },
+  "dependencies": {
+    "atom-space-pen-views": "^2.0.3",
+    "chokidar": "^1.0"
+  },
+  "description": "Hasktags-powered replacement for symbols-view on Haskell projects",
+  "devDependencies": {},
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "homepage": "https://github.com/atom-haskell/ide-haskell-hasktags#readme",
+  "keywords": [
+    "ide-haskell",
+    "ide",
+    "haskell",
+    "hasktags",
+    "symbols-view"
+  ],
+  "license": "MIT",
+  "main": "./lib/ide-haskell-hasktags",
+  "name": "ide-haskell-hasktags",
+  "optionalDependencies": {},
+  "readme": "# ide-haskell-hasktags package\n\nHasktags-powered replacement for symbols-view on Haskell projects\n\nThis project is in alpha.\n\n![image](https://cloud.githubusercontent.com/assets/7275622/12073886/592fbe8e-b146-11e5-8eb7-9a5153f3fb3c.png)\n\n## Dependencies\n\nAtom Packages:\n\n* [language-haskell](https://github.com/atom-haskell/language-haskell)\n* [ide-haskell](https://github.com/atom-haskell/ide-haskell)\n\nHaskell packages:\n\n* [hasktags](https://hackage.haskell.org/package/hasktags) -- optional since v0.0.7\n\n## Configuration\n\nSet full path to `hasktags` executable in package settings. For example, if you installed hasktags into `$HOME/.cabal/` (default cabal location), use `/path/to/home/dir/.cabal/bin/hasktags`. Specifics *will* depend on platform.\n\nSince 0.0.7, hasktags is bundled with the package and bundled version is used by default. It runs on top of nodejs though (via the magic of ghcjs), so a \"real\" binary will likely be faster.\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atom-haskell/ide-haskell-hasktags.git"
+  },
+  "version": "0.0.10"
+}

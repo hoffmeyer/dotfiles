@@ -1,0 +1,27 @@
+"*":
+  core:
+    telemetryConsent: "limited"
+    themes: [
+      "one-dark-ui"
+      "solarized-dark-syntax"
+    ]
+  editor:
+    fontSize: 16
+    invisibles: {}
+  "exception-reporting":
+    userId: "56b1b59f-9c2b-0e71-4585-411f8872dee6"
+  "haskell-ghc-mod":
+    additionalPathDirectories: [
+      "/Users/hoffmeyer/.local/bin/"
+    ]
+    onSaveCheck: false
+  "haskell-pointfree": {}
+  "ide-haskell":
+    onSavePrettify: true
+    stylishHaskellPath: "/Users/hoffmeyer/.local/bin/stylish-haskell"
+  term3:
+    colors:
+      background: "#000837"
+  "vim-mode": {}
+  welcome:
+    showOnStartup: false
